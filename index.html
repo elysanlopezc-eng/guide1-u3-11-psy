@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colegio Montano - Understanding Personality Study Guide</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        montanoBlue: '#1269A8',
+                        montanoYellow: '#F7D615',
+                        montanoTeal: '#54887D',
+                        montanoLightBlue: '#88B5C7',
+                        montanoOlive: '#A6B046',
+                        montanoSoftWhite: '#F2F5E9'
+                    },
+                    fontFamily: {
+                        sans: ['Nunito', 'Segoe UI', 'Tahoma', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --montano-blue: #1269A8;
+            --montano-yellow: #F7D615;
+            --montano-teal: #54887D;
+            --montano-lightblue: #88B5C7;
+            --montano-olive: #A6B046;
+            --montano-softwhite: #F2F5E9;
+        }
+
+        body {
+            background-color: #E2E8F0;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .whiteboard-frame {
+            background-color: #FFFFFF;
+            border: 12px solid #CBD5E1;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            position: relative;
+        }
+
+        .tab-btn {
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background-color: var(--montano-blue);
+            color: #FFFFFF;
+            border-bottom: 4px solid var(--montano-yellow);
+        }
+
+        .tab-btn:not(.active):hover {
+            background-color: #E2E8F0;
+            color: var(--montano-blue);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #F1F5F9;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: var(--montano-lightblue);
+            border-radius: 4px;
+        }
+
+        /* Pulse recording badge animation */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 0.4; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+        .recording-pulse {
+            animation: pulse-ring 1.5s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="p-2 sm:p-4 min-h-screen">
+
+    <!-- Main Container / Whiteboard Frame -->
+    <div id="whiteboardContainer" class="whiteboard-frame max-w-7xl mx-auto min-h-[90vh] flex flex-col overflow-hidden">
+        
+        <!-- Institutional Header -->
+        <header class="bg-montanoSoftWhite border-b border-gray-300 p-4 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center space-x-4">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyEop0yf6lZ7Jk9MILZxF1rBj4Oqs5esyhIQ&s" 
+                     alt="Colegio Montano Logo" 
+                     class="h-14 w-auto object-contain rounded-md shadow-sm bg-white p-1"
+                     onerror="this.src='https://placehold.co/120x60/1269A8/FFFFFF?text=Colegio+Montano'">
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-extrabold text-montanoBlue leading-tight">COLEGIO MONTANO</h1>
+                    <p class="text-sm font-semibold text-montanoTeal">Psychology & Human Behavior | Grade 11 (ESL B2/C1)</p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-3">
+                <span class="bg-montanoOlive/20 text-montanoOlive font-bold text-xs px-3 py-1.5 rounded-full border border-montanoOlive/40">
+                    <i class="fa-solid fa-graduation-cap mr-1"></i> Interactive Module
+                </span>
+                <button onclick="toggleFullscreen()" title="Toggle Fullscreen" class="bg-montanoBlue hover:bg-sky-800 text-white font-bold p-2.5 rounded-xl shadow transition duration-200 flex items-center justify-center">
+                    <i id="fullscreenIcon" class="fa-solid fa-expand text-lg"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Topic Banner -->
+        <div class="bg-montanoBlue text-white px-6 py-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+            <div>
+                <h2 class="text-xl font-bold text-montanoYellow flex items-center gap-2">
+                    <i class="fa-solid fa-brain"></i> Topic: Understanding Personality
+                </h2>
+                <p class="text-xs sm:text-sm text-gray-100">Exploring Temperament, Character, Nature vs. Nurture & Individual Differences</p>
+            </div>
+            <div class="text-xs bg-white/10 px-3 py-1.5 rounded-lg border border-white/20">
+                <i class="fa-solid fa-earth-americas text-montanoYellow"></i> Target Level: B2 High - C1 (Advanced ESL)
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="bg-gray-100 border-b border-gray-300 flex overflow-x-auto custom-scrollbar font-bold text-xs sm:text-sm text-gray-600">
+            <button onclick="switchTab('tab1')" id="tab1-btn" class="tab-btn active px-5 py-3.5 whitespace-nowrap flex items-center gap-2">
+                <i class="fa-solid fa-book-open"></i> 1. Theoretical Foundations
+            </button>
+            <button onclick="switchTab('tab2')" id="tab2-btn" class="tab-btn px-5 py-3.5 whitespace-nowrap flex items-center gap-2">
+                <i class="fa-solid fa-list-check"></i> 2. Solved Examples (15)
+            </button>
+            <button onclick="switchTab('tab3')" id="tab3-btn" class="tab-btn px-5 py-3.5 whitespace-nowrap flex items-center gap-2">
+                <i class="fa-solid fa-microphone-lines"></i> 3. Voice Simulator & Dashboard
+            </button>
+            <button onclick="switchTab('tab4')" id="tab4-btn" class="tab-btn px-5 py-3.5 whitespace-nowrap flex items-center gap-2">
+                <i class="fa-solid fa-comments"></i> 4. Critical Reflection
+            </button>
+            <button onclick="switchTab('tab5')" id="tab5-btn" class="tab-btn px-5 py-3.5 whitespace-nowrap flex items-center gap-2">
+                <i class="fa-solid fa-pen-to-square"></i> 5. Formative Evaluation (15)
+            </button>
+        </nav>
+
+        <!-- Content Body Area -->
+        <main class="p-4 sm:p-6 flex-grow bg-white overflow-y-auto custom-scrollbar">
+
+            <!-- TAB 1: THEORETICAL FOUNDATIONS -->
+            <section id="tab1" class="tab-content space-y-6">
+                <div class="border-l-4 border-montanoBlue bg-blue-50/50 p-4 rounded-r-xl">
+                    <h3 class="text-xl font-bold text-montanoBlue mb-1">What Makes People Different?</h3>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        Human psychology seeks to explain why individuals think, feel, and behave in unique ways. 
+                        While everyone shares fundamental biological structures, individual differences arise from a complex interplay between biological traits, moral choices, and environmental exposures.
+                    </p>
+                </div>
+
+                <!-- Core Trio Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Personality Card -->
+                    <div class="bg-white rounded-2xl border-2 border-montanoBlue p-5 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-bold uppercase tracking-wider text-white bg-montanoBlue px-2.5 py-1 rounded-full">Overall Blend</span>
+                            <i class="fa-solid fa-user-gear text-2xl text-montanoBlue"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800">Personality</h4>
+                        <p class="text-xs text-gray-500 mb-3">The dynamic sum of psychological traits</p>
+                        <p class="text-sm text-gray-600 mb-4">
+                            The unique and relatively enduring pattern of thinking, feeling, and acting that characterizes an individual across time and context.
+                        </p>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs font-bold text-gray-600">
+                                <span>Stability over time</span>
+                                <span class="text-montanoBlue">High (78%)</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-montanoBlue h-2 rounded-full" style="width: 78%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Temperament Card -->
+                    <div class="bg-white rounded-2xl border-2 border-montanoTeal p-5 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-bold uppercase tracking-wider text-white bg-montanoTeal px-2.5 py-1 rounded-full">Biological Hardwiring</span>
+                            <i class="fa-solid fa-dna text-2xl text-montanoTeal"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800">Temperament</h4>
+                        <p class="text-xs text-gray-500 mb-3">Inborn emotional reactivity</p>
+                        <p class="text-sm text-gray-600 mb-4">
+                            The neurobiologically based disposition observable from infancy, governing emotional reactivity, arousal levels, and self-regulation.
+                        </p>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs font-bold text-gray-600">
+                                <span>Genetic Influence</span>
+                                <span class="text-montanoTeal">Very High (90%)</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-montanoTeal h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Character Card -->
+                    <div class="bg-white rounded-2xl border-2 border-montanoOlive p-5 shadow-sm hover:shadow-md transition">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-bold uppercase tracking-wider text-white bg-montanoOlive px-2.5 py-1 rounded-full">Moral & Ethical</span>
+                            <i class="fa-solid fa-shield-halved text-2xl text-montanoOlive"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-gray-800">Character</h4>
+                        <p class="text-xs text-gray-500 mb-3">Acquired moral standards</p>
+                        <p class="text-sm text-gray-600 mb-4">
+                            The mental and moral qualities distinctive to an individual, shaped by personal choices, ethical values, self-discipline, and social norms.
+                        </p>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs font-bold text-gray-600">
+                                <span>Environmental Shaping</span>
+                                <span class="text-montanoOlive">High (85%)</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-montanoOlive h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Nature vs. Nurture Continuum -->
+                <div class="bg-montanoSoftWhite border border-gray-300 rounded-2xl p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-lg font-bold text-montanoBlue flex items-center gap-2">
+                            <i class="fa-solid fa-sliders"></i> Nature vs. Nurture Continuum Simulator
+                        </h4>
+                        <span class="text-xs font-semibold text-gray-500">Drag to observe influence balance</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-gray-700">
+                            <span class="text-emerald-700"><i class="fa-solid fa-seedling"></i> NATURE (Genetics & Biology)</span>
+                            <span id="continuumRatio" class="bg-montanoBlue text-white px-3 py-1 rounded-full text-xs">50% Nature / 50% Nurture</span>
+                            <span class="text-indigo-700"><i class="fa-solid fa-house-user"></i> NURTURE (Environment & Culture)</span>
+                        </div>
+
+                        <input type="range" id="natureSlider" min="0" max="100" value="50" oninput="updateContinuum(this.value)" class="w-full accent-montanoBlue cursor-pointer">
+
+                        <div id="continuumOutput" class="bg-white p-4 rounded-xl border border-gray-200 text-sm text-gray-700">
+                            <strong>Balanced Dynamic Interaction:</strong> Most human psychological traits (such as Extraversion or Emotional Resilience) are roughly 50% inherited biologically and 50% developed through environment, life experiences, and parenting.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparison Matrix: Examples vs Non-Examples -->
+                <div class="space-y-3">
+                    <h4 class="text-lg font-bold text-gray-800 flex items-center gap-2">
+                        <i class="fa-solid fa-code-compare text-montanoBlue"></i> Conceptual Distinction: Examples vs. Non-Examples
+                    </h4>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm border-collapse rounded-xl overflow-hidden shadow-sm">
+                            <thead>
+                                <tr class="bg-montanoBlue text-white">
+                                    <th class="p-3">Concept</th>
+                                    <th class="p-3">Correct Example (Valid Instance)</th>
+                                    <th class="p-3">Non-Example (Common Misconception)</th>
+                                    <th class="p-3">Why it is a Non-Example</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 bg-gray-50">
+                                <tr>
+                                    <td class="p-3 font-bold text-montanoBlue">Temperament</td>
+                                    <td class="p-3 text-emerald-800 bg-emerald-50/50">An infant crying intensely when exposed to sudden loud noises or bright lights.</td>
+                                    <td class="p-3 text-rose-800 bg-rose-50/50">Choosing to donate money to a charitable foundation every month.</td>
+                                    <td class="p-3 text-gray-600">Donating is a conscious moral choice (Character), not an innate physiological reaction.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold text-montanoTeal">Character</td>
+                                    <td class="p-3 text-emerald-800 bg-emerald-50/50">Refusing to cheat on a exam even when nobody is watching.</td>
+                                    <td class="p-3 text-rose-800 bg-rose-50/50">Having a naturally fast resting heart rate under mild stress.</td>
+                                    <td class="p-3 text-gray-600">Heart rate reactivity is a biological response (Temperament), not an ethical virtue.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold text-montanoOlive">Personality</td>
+                                    <td class="p-3 text-emerald-800 bg-emerald-50/50">Consistently being outgoing, talkative, and seeking social gatherings across high school.</td>
+                                    <td class="p-3 text-rose-800 bg-rose-50/50">Feeling irritable for 20 minutes because you skipped breakfast.</td>
+                                    <td class="p-3 text-gray-600">Temporary physical states (Mood/Hunger) are transient, whereas personality requires stability across time.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: SOLVED EXAMPLES (15 EXAMPLES) -->
+            <section id="tab2" class="tab-content hidden space-y-6">
+                <div class="flex justify-between items-center border-b pb-3">
+                    <div>
+                        <h3 class="text-xl font-bold text-montanoBlue">15 Solved & Categorized Examples</h3>
+                        <p class="text-xs text-gray-500">Listen to native audio pronunciation using the speaker button.</p>
+                    </div>
+                    <span class="text-xs font-semibold bg-montanoYellow/30 text-yellow-800 px-3 py-1 rounded-full border border-montanoYellow">
+                        <i class="fa-solid fa-volume-high"></i> TTS Audio Enabled
+                    </span>
+                </div>
+
+                <!-- Level 1: Basic Examples -->
+                <div class="space-y-4">
+                    <h4 class="text-md font-bold text-white bg-montanoBlue px-4 py-2 rounded-xl flex items-center gap-2">
+                        <i class="fa-solid fa-seedling"></i> Level 1: Basic Concept Identification (Examples 1 - 5)
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="basicExamplesGrid"></div>
+                </div>
+
+                <!-- Level 2: Intermediate Examples -->
+                <div class="space-y-4 pt-4">
+                    <h4 class="text-md font-bold text-white bg-montanoTeal px-4 py-2 rounded-xl flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group"></i> Level 2: Intermediate Analytical Scenarios (Examples 6 - 10)
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="intermediateExamplesGrid"></div>
+                </div>
+
+                <!-- Level 3: Advanced Examples -->
+                <div class="space-y-4 pt-4">
+                    <h4 class="text-md font-bold text-white bg-montanoOlive px-4 py-2 rounded-xl flex items-center gap-2">
+                        <i class="fa-solid fa-brain"></i> Level 3: Advanced Behavioral & Psychological Analyses (Examples 11 - 15)
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="advancedExamplesGrid"></div>
+                </div>
+            </section>
+
+            <!-- TAB 3: LIVE VOICE SIMULATOR & DASHBOARD -->
+            <section id="tab3" class="tab-content hidden space-y-6">
+                <div class="bg-gradient-to-r from-montanoBlue to-sky-900 text-white p-6 rounded-2xl shadow-md">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <span class="bg-montanoYellow text-gray-900 font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Interactive Voice Lab</span>
+                            <h3 class="text-2xl font-bold mt-1">Live Psychology Speech Simulator</h3>
+                            <p class="text-xs sm:text-sm text-sky-100">Speak into your microphone to answer psychological prompts. The AI simulator analyzes your pronunciation, content accuracy, and etiquette in real-time.</p>
+                        </div>
+                        <div class="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-xl border border-white/20">
+                            <i class="fa-solid fa-robot text-montanoYellow text-xl"></i>
+                            <span class="text-xs font-semibold">AI Evaluator Active</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <!-- Speech Simulator Interface (Left 7 cols) -->
+                    <div class="lg:col-span-7 bg-white border border-gray-200 rounded-2xl p-5 shadow-sm space-y-4 flex flex-col justify-between">
+                        
+                        <!-- Scenario Prompt Box -->
+                        <div class="bg-montanoSoftWhite border-l-4 border-montanoBlue p-4 rounded-r-xl">
+                            <span class="text-xs font-bold text-montanoBlue uppercase">Current Scenario Prompt</span>
+                            <p id="simPrompt" class="text-sm font-semibold text-gray-800 mt-1">
+                                "Explain to a peer the core difference between Temperament and Character using a concrete example."
+                            </p>
+                            <button onclick="newSimPrompt()" class="mt-2 text-xs text-montanoBlue hover:underline font-bold flex items-center gap-1">
+                                <i class="fa-solid fa-rotate"></i> Change Prompt
+                            </button>
+                        </div>
+
+                        <!-- Audio Output of AI Character -->
+                        <div class="flex items-center gap-3 bg-gray-50 p-3 rounded-xl border border-gray-200">
+                            <div class="w-10 h-10 rounded-full bg-montanoBlue flex items-center justify-center text-white font-bold text-lg">
+                                Dr.M
+                            </div>
+                            <div class="flex-grow">
+                                <p class="text-xs text-gray-500 font-bold">Dr. Montano (AI Instructor):</p>
+                                <p id="aiResponseText" class="text-xs text-gray-700 italic">"Press microphone or type below to share your explanation. I will analyze your answer."</p>
+                            </div>
+                            <button onclick="speakAIResponse()" class="bg-montanoBlue/10 text-montanoBlue p-2 rounded-lg hover:bg-montanoBlue/20">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </button>
+                        </div>
+
+                        <!-- User Input Section -->
+                        <div class="space-y-3">
+                            <label class="block text-xs font-bold text-gray-600 uppercase">Your Spoken or Written Response:</label>
+                            
+                            <div class="relative">
+                                <textarea id="speechTransmittedText" rows="3" 
+                                    class="w-full border border-gray-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-montanoBlue focus:outline-none custom-scrollbar"
+                                    placeholder="Click the microphone and speak, or type your response here..."></textarea>
+                                
+                                <span id="recordingBadge" class="hidden absolute top-3 right-3 bg-rose-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full recording-pulse flex items-center gap-1">
+                                    <i class="fa-solid fa-circle"></i> LISTENING
+                                </span>
+                            </div>
+
+                            <div class="flex flex-wrap items-center justify-between gap-3">
+                                <button id="micBtn" onclick="toggleSpeechRecognition()" 
+                                    class="bg-rose-600 hover:bg-rose-700 text-white font-bold px-4 py-2.5 rounded-xl shadow text-xs sm:text-sm flex items-center gap-2 transition">
+                                    <i class="fa-solid fa-microphone text-base"></i>
+                                    <span id="micBtnText">Start Speaking</span>
+                                </button>
+
+                                <button onclick="evaluateSpeechInput()" 
+                                    class="bg-montanoBlue hover:bg-sky-800 text-white font-bold px-6 py-2.5 rounded-xl shadow text-xs sm:text-sm flex items-center gap-2 transition">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i> Evaluate Response
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Live Performance Dashboard (Right 5 cols) -->
+                    <div class="lg:col-span-5 bg-gray-50 border border-gray-200 rounded-2xl p-5 shadow-sm space-y-4">
+                        <h4 class="text-md font-bold text-gray-800 border-b pb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line text-montanoBlue"></i> Live Performance Dashboard
+                        </h4>
+
+                        <!-- Metric 1: Pronunciation & Speech Clarity -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-bold">
+                                <span class="text-gray-700">Pronunciation & Speech Clarity</span>
+                                <span id="scorePronunciationText" class="text-montanoBlue">0%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div id="barPronunciation" class="bg-montanoBlue h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Metric 2: Topic / Grammar Accuracy -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-bold">
+                                <span class="text-gray-700">Topic & Grammar Accuracy</span>
+                                <span id="scoreAccuracyText" class="text-montanoTeal">0%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div id="barAccuracy" class="bg-montanoTeal h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Metric 3: Politeness / Expression Etiquette -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-bold">
+                                <span class="text-gray-700">Academic Etiquette & Expression</span>
+                                <span id="scoreEtiquetteText" class="text-montanoOlive">0%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div id="barEtiquette" class="bg-montanoOlive h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Detected Key Terms Container -->
+                        <div class="space-y-2">
+                            <span class="text-xs font-bold text-gray-600 block">Detected Psychological Keywords:</span>
+                            <div id="keywordBadgeContainer" class="flex flex-wrap gap-1.5 min-h-[40px] p-2 bg-white rounded-xl border border-gray-200">
+                                <span class="text-xs text-gray-400 italic">No keywords detected yet...</span>
+                            </div>
+                        </div>
+
+                        <!-- AI Feedback Box -->
+                        <div class="bg-white p-3.5 rounded-xl border border-gray-200 space-y-1">
+                            <span class="text-xs font-bold text-montanoBlue flex items-center gap-1">
+                                <i class="fa-solid fa-lightbulb text-montanoYellow"></i> AI Pedagogical Feedback
+                            </span>
+                            <p id="aiPedagogicalFeedback" class="text-xs text-gray-600 leading-relaxed">
+                                Awaiting speech input. Submit your spoken logic above to receive real-time constructive feedback.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: CRITICAL REFLECTION QUESTIONS -->
+            <section id="tab4" class="tab-content hidden space-y-6">
+                <div class="border-l-4 border-montanoTeal bg-teal-50/50 p-4 rounded-r-xl">
+                    <h3 class="text-xl font-bold text-montanoTeal">Critical Reflection & Practical Application</h3>
+                    <p class="text-sm text-gray-600">Formulate high-level analytical answers (B2-C1 ESL target syntax). Write your thoughts into the textareas below and save your responses.</p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Reflection 1 -->
+                    <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm space-y-3">
+                        <label class="block font-bold text-gray-800 text-sm sm:text-base">
+                            1. How can understanding a person's innate temperament prevent interpersonal conflicts in group projects at school?
+                        </label>
+                        <textarea id="refl1" rows="3" class="w-full border border-gray-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-montanoTeal focus:outline-none" placeholder="Elaborate your reflection here..."></textarea>
+                    </div>
+
+                    <!-- Reflection 2 -->
+                    <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm space-y-3">
+                        <label class="block font-bold text-gray-800 text-sm sm:text-base">
+                            2. Analyze the ethical debate: Can a person with a highly reactive or anxious temperament develop an exceptionally resilient and honest character? Explain the mechanism.
+                        </label>
+                        <textarea id="refl2" rows="3" class="w-full border border-gray-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-montanoTeal focus:outline-none" placeholder="Elaborate your reflection here..."></textarea>
+                    </div>
+
+                    <!-- Reflection 3 -->
+                    <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm space-y-3">
+                        <label class="block font-bold text-gray-800 text-sm sm:text-base">
+                            3. Evaluate the impact of modern digital environments (social media algorithms) on the 'Nurture' side of adolescent personality development.
+                        </label>
+                        <textarea id="refl3" rows="3" class="w-full border border-gray-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-montanoTeal focus:outline-none" placeholder="Elaborate your reflection here..."></textarea>
+                    </div>
+
+                    <div class="flex justify-end">
+                        <button onclick="saveReflections()" class="bg-montanoTeal hover:bg-teal-700 text-white font-bold px-6 py-2.5 rounded-xl shadow text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-floppy-disk"></i> Save Reflections
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: FORMATIVE EVALUATION (15 PROBLEMS) -->
+            <section id="tab5" class="tab-content hidden space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b pb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-montanoBlue">15 Formative Evaluation Exercises</h3>
+                        <p class="text-xs text-gray-500">Solve each exercise independently before toggling the step-by-step solution.</p>
+                    </div>
+                    <span class="bg-montanoOlive/20 text-montanoOlive font-bold text-xs px-3 py-1 rounded-full border border-montanoOlive">
+                        15 Interactive Toggles
+                    </span>
+                </div>
+
+                <!-- Level 1 Formative Exercises -->
+                <div class="space-y-4">
+                    <h4 class="text-sm font-extrabold text-montanoBlue bg-blue-50 border-l-4 border-montanoBlue p-3 rounded-r-lg">
+                        LEVEL 1: BASIC CONCEPTUAL IDENTIFICATION (EXERCISES 1 - 5)
+                    </h4>
+                    <div class="space-y-3" id="evalLevel1Container"></div>
+                </div>
+
+                <!-- Level 2 Formative Exercises -->
+                <div class="space-y-4 pt-4">
+                    <h4 class="text-sm font-extrabold text-montanoTeal bg-teal-50 border-l-4 border-montanoTeal p-3 rounded-r-lg">
+                        LEVEL 2: INTERMEDIATE CASE ANALYSES (EXERCISES 6 - 10)
+                    </h4>
+                    <div class="space-y-3" id="evalLevel2Container"></div>
+                </div>
+
+                <!-- Level 3 Formative Exercises -->
+                <div class="space-y-4 pt-4">
+                    <h4 class="text-sm font-extrabold text-montanoOlive bg-lime-50 border-l-4 border-montanoOlive p-3 rounded-r-lg">
+                        LEVEL 3: ADVANCED PSYCHOLOGICAL SCENARIOS (EXERCISES 11 - 15)
+                    </h4>
+                    <div class="space-y-3" id="evalLevel3Container"></div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Institutional Footer -->
+        <footer class="bg-montanoSoftWhite border-t border-gray-300 px-6 py-3 text-xs text-gray-600 flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div>
+                <span class="font-bold text-montanoBlue">Colegio Montano</span> &copy; 2026 - Educational Technology Department
+            </div>
+            <div class="flex items-center space-x-4">
+                <span>Grade 11 - Psychology</span>
+                <span>•</span>
+                <span>ESL B2/C1 Curriculum</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-gray-900 text-white text-xs px-4 py-3 rounded-xl shadow-xl hidden transition-all z-50 flex items-center gap-2">
+        <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400"></i>
+        <span id="toastMsg">Action completed successfully.</span>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        /* --------------------------------------------------
+           DATA: 15 SOLVED EXAMPLES
+        -------------------------------------------------- */
+        const solvedExamplesData = [
+            // Level 1: Basic
+            {
+                id: 1, level: 1,
+                title: "Infant Sensory Response",
+                category: "Temperament",
+                scenario: "Baby Lucas gets extremely startled and cries whenever a phone rings, whereas Baby Maya remains calm.",
+                explanation: "This is a manifestation of **Temperament**. It represents an inborn, neurobiological reactivity to sensory stimulation observable right after birth prior to environmental learning."
+            },
+            {
+                id: 2, level: 2,
+                title: "Academic Integrity Under Pressure",
+                category: "Character",
+                scenario: "Sophia finds an answer key on the teacher's desk during an unattended break but chooses to leave it untouched.",
+                explanation: "This demonstrates **Character**. It involves a voluntary choice governed by moral standards, ethics, and self-discipline rather than automatic biological instinct."
+            },
+            {
+                id: 3, level: 1,
+                title: "Cross-Situational Sociability",
+                category: "Personality",
+                scenario: "Daniel is consistently talkative, enthusiastic, and warm at home, school, and soccer practice over many years.",
+                explanation: "This reflects **Personality**. It exhibits an enduring, stable pattern of behavior and interpersonal style across diverse social contexts over time."
+            },
+            {
+                id: 4, level: 1,
+                title: "Biological Twin Trait Similarity",
+                category: "Nature",
+                scenario: "Identical twins separated at birth both score in the 90th percentile for novelty-seeking behaviors.",
+                explanation: "This highlights the role of **Nature**. Shared genetic inheritance predisposes individuals toward similar neurochemical baseline traits regardless of different environments."
+            },
+            {
+                id: 5, level: 1,
+                title: "Cultural Etiquette Adaptation",
+                category: "Nurture",
+                scenario: "An American student moving to Japan learns to bow respectfully and moderate vocal loudness in public transit.",
+                explanation: "This illustrates **Nurture**. Socialization, cultural norms, and environmental learning reshape behavioral expressions and customs."
+            },
+            // Level 2: Intermediate
+            {
+                id: 6, level: 2,
+                title: "High Reactivity Turned into Leadership",
+                category: "Temperament + Character",
+                scenario: "Mateo has a naturally high-arousal temperament, but trains himself through martial arts to remain calm during school debates.",
+                explanation: "This shows how **Character** (conscious self-regulation and discipline) can channel and manage underlying **Temperament** (innate physiological arousal)."
+            },
+            {
+                id: 7, level: 2,
+                title: "Non-Example Analysis: Transient Mood",
+                category: "Non-Example (Personality)",
+                scenario: "Elena is normally friendly, but shouts at a classmate because she has a severe migraine headache.",
+                explanation: "This is a **Non-Example of Personality**. Irritability caused by physical discomfort is a temporary state, not an enduring trait."
+            },
+            {
+                id: 8, level: 2,
+                title: "Consistency vs. Adaptability",
+                category: "Personality Dynamics",
+                scenario: "Liam is naturally introverted but successfully delivers a compelling campaign speech for Student Council president.",
+                explanation: "Exemplifies that **Personality** predisposes baseline comfort zones, but individuals can willfully adapt behaviors to accomplish specific goals."
+            },
+            {
+                id: 9, level: 2,
+                title: "Epigenetic Environment Interaction",
+                category: "Nature-Nurture Interplay",
+                scenario: "A youth with genetic predisposition to anxiety experiences zero clinical symptoms due to a supportive family environment.",
+                explanation: "Demonstrates that **Nature** provides potential predispositions, but **Nurture** acts as the triggering or protective modifier."
+            },
+            {
+                id: 10, level: 2,
+                title: "Non-Example Analysis: Automatic Reflex",
+                category: "Non-Example (Character)",
+                scenario: "Blinking rapidly when a baseball flies near your face.",
+                explanation: "This is a **Non-Example of Character**. A reflex is an involuntary biological defense mechanism, not a moral or ethical decision."
+            },
+            // Level 3: Advanced
+            {
+                id: 11, level: 3,
+                title: "Moral Growth Despite Adverse Temperament",
+                category: "Advanced Psychodynamics",
+                scenario: "A person born with low natural empathy systematically practices cognitive perspective-taking to become a fair judge.",
+                explanation: "Proves that moral **Character** can be intentionally cultivated through metacognitive effort even when biological **Temperament** lacks natural inclinations."
+            },
+            {
+                id: 12, level: 3,
+                title: "Stability of the Big Five Traits",
+                category: "Personality Research",
+                scenario: "Longitudinal studies tracking individuals from age 15 to 60 reveal high stability in Extraversion and Conscientiousness.",
+                explanation: "Supports the definition of **Personality** as a stable structural framework that resists radical spontaneous fluctuations in adulthood."
+            },
+            {
+                id: 13, level: 3,
+                title: "Evocative Gene-Environment Correlation",
+                category: "Nature-Nurture Synergy",
+                scenario: "A naturally cheerful toddler evokes warm responses from strangers, enriching her social development environment.",
+                explanation: "Illustrates how **Nature** (temperament) actively shapes **Nurture** by eliciting specific social reactions from the environment."
+            },
+            {
+                id: 14, level: 3,
+                title: "Cultural Variations in Character Standards",
+                category: "Cross-Cultural Character",
+                scenario: "Collectivist societies define good character through community harmony, whereas Individualist cultures emphasize autonomy.",
+                explanation: "Demonstrates that while **Temperament** is biologically universal, **Character** values are strongly mediated by cultural standards."
+            },
+            {
+                id: 15, level: 3,
+                title: "Neuroplasticity and Habitual Change",
+                category: "Neuro-Psychology",
+                scenario: "An impulsive adolescent undergoes cognitive behavioral training, altering neural pathways to boost self-control.",
+                explanation: "Shows that sustained effort in developing **Character** creates physical structural changes in the brain, blurring the line between nature and nurture."
+            }
+        ];
+
+        /* --------------------------------------------------
+           DATA: 15 FORMATIVE EVALUATION EXERCISES
+        -------------------------------------------------- */
+        const evaluationExercisesData = [
+            // Level 1 (1 - 5)
+            {
+                id: 1, level: 1,
+                question: "Classify: A newborn baby who rarely cries, sleeps predictably, and adapts quickly to new sounds.",
+                solution: "Category: Temperament (Easy Temperament Type). Reasoning: Biological, observable in early infancy prior to social conditioning."
+            },
+            {
+                id: 2, level: 1,
+                question: "Classify: Returning a lost wallet full of cash to the police station without taking any money.",
+                solution: "Category: Character. Reasoning: Involves moral choice, honesty, and adherence to ethical principles."
+            },
+            {
+                id: 3, level: 1,
+                question: "Classify: Being known across school as creative, punctual, organized, and slightly reserved.",
+                solution: "Category: Personality. Reasoning: Represents a composite pattern of enduring cognitive, behavioral, and emotional traits."
+            },
+            {
+                id: 4, level: 1,
+                question: "Determine Influence: Inheriting high eye-hand coordination from athletic biological parents.",
+                solution: "Influence: Nature. Reasoning: Driven by biological and genetic inheritance."
+            },
+            {
+                id: 5, level: 1,
+                question: "Determine Influence: Learning fluent English and Spanish due to growing up in a bilingual household.",
+                solution: "Influence: Nurture. Reasoning: Acquired through environmental exposure, learning, and practice."
+            },
+            // Level 2 (6 - 10)
+            {
+                id: 6, level: 2,
+                question: "Scenario Analysis: Mark is naturally hot-tempered when frustrated (Temperament), yet he never insults others during debates. Why?",
+                solution: "Solution: Mark uses his cultivated Character (self-regulation and ethical standards) to suppress biological emotional surges."
+            },
+            {
+                id: 7, level: 2,
+                question: "Evaluate Misconception: 'Personality can change 100% depending on who you are talking to right now.' Is this statement accurate?",
+                solution: "Solution: Inaccurate. While mood and state vary, core Personality traits remain relatively stable across time and situations."
+            },
+            {
+                id: 8, level: 2,
+                question: "Identify Non-Example: Which of the following is NOT a character trait? (a) Honesty, (b) High sensory threshold, (c) Fairness.",
+                solution: "Solution: (b) High sensory threshold. This is a physiological/temperamental attribute, not an ethical virtue."
+            },
+            {
+                id: 9, level: 2,
+                question: "Nature-Nurture Continuum: Where would basic intelligence (IQ potential vs educational achievement) fall?",
+                solution: "Solution: In the middle (Interactive Continuum). Potential capacity has strong Nature roots, but actualized IQ requires educational Nurture."
+            },
+            {
+                id: 10, level: 2,
+                question: "Distinguish: Differentiate between a 'State' and a 'Trait'. Give one quick example of each.",
+                solution: "Solution: A State is temporary (e.g., feeling angry today due to lack of sleep); a Trait is an enduring tendency (e.g., Chronic Agreeableness)."
+            },
+            // Level 3 (11 - 15)
+            {
+                id: 11, level: 3,
+                question: "Case Analysis: Twin A is raised in a stressful environment and develops high anxiety. Twin B (identical) is raised in a stable home and is calm. What does this demonstrate?",
+                solution: "Solution: Environmental Gene Expression (Epigenetics). Identical genotypes (Nature) yield different phenotypes based on environmental triggers (Nurture)."
+            },
+            {
+                id: 12, level: 3,
+                question: "Synthesis Question: How does early infant temperament influence adult personality formation over 20 years?",
+                solution: "Solution: Early temperament provides the biological raw material. As the child interacts with parents and culture, this raw material matures into structured adult personality."
+            },
+            {
+                id: 13, level: 3,
+                question: "Critique: Can an individual have a 'bad' temperament? Explain scientifically.",
+                solution: "Solution: No. Temperament is ethically neutral (e.g., reactive vs. calm). Moral terms ('good' or 'bad') only apply to character and voluntary choices."
+            },
+            {
+                id: 14, level: 3,
+                question: "Applied Scenario: Describe how a school teacher can modify the class environment (Nurture) to support an introverted student (Nature).",
+                solution: "Solution: Providing structured small-group options or written reflection time reduces sensory overload for introverted temperaments."
+            },
+            {
+                id: 15, level: 3,
+                question: "Psychological Formulation: Summarize the formula connecting Temperament, Character, and Personality.",
+                solution: "Solution: Personality = (Biological Temperament + Environmental Nurture) shaped over time by Conscious Moral Choices (Character)."
+            }
+        ];
+
+        /* --------------------------------------------------
+           TAB SWITCHING & FULLSCREEN LOGIC
+        -------------------------------------------------- */
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById(`${tabId}-btn`).classList.add('active');
+        }
+
+        function toggleFullscreen() {
+            const container = document.getElementById('whiteboardContainer');
+            const icon = document.getElementById('fullscreenIcon');
+            
+            if (!document.fullscreenElement) {
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                }
+                icon.classList.remove('fa-expand');
+                icon.classList.add('fa-compress');
+                showToast("Entered Fullscreen Digital Whiteboard Mode");
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+                icon.classList.remove('fa-compress');
+                icon.classList.add('fa-expand');
+                showToast("Exited Fullscreen Mode");
+            }
+        }
+
+        /* --------------------------------------------------
+           TAB 1: NATURE VS NURTURE SLIDER
+        -------------------------------------------------- */
+        function updateContinuum(val) {
+            const nature = parseInt(val);
+            const nurture = 100 - nature;
+            const ratioBadge = document.getElementById('continuumRatio');
+            const outputBox = document.getElementById('continuumOutput');
+
+            ratioBadge.innerText = `${nature}% Nature / ${nurture}% Nurture`;
+
+            if (nature > 75) {
+                outputBox.innerHTML = `<strong>Strong Biological Focus (${nature}% Nature):</strong> Traits like infant sensory reactivity, eye color, and biological reflexes are predominantly determined by genetics.`;
+            } else if (nurture > 75) {
+                outputBox.innerHTML = `<strong>Strong Environmental Focus (${nurture}% Nurture):</strong> Language choice, social manners, moral customs, and belief systems are heavily molded by culture and parenting.`;
+            } else {
+                outputBox.innerHTML = `<strong>Balanced Interaction (${nature}% Nature / ${nurture}% Nurture):</strong> Most high-order personality traits (like Extraversion, Emotional Stability, and Openness) emerge from genetics interacting dynamically with environmental experiences.`;
+            }
+        }
+
+        /* --------------------------------------------------
+           TAB 2: SOLVED EXAMPLES RENDERING & TTS
+        -------------------------------------------------- */
+        function renderSolvedExamples() {
+            const basicGrid = document.getElementById('basicExamplesGrid');
+            const interGrid = document.getElementById('intermediateExamplesGrid');
+            const advGrid = document.getElementById('advancedExamplesGrid');
+
+            solvedExamplesData.forEach(ex => {
+                const cardHtml = `
+                    <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:border-montanoBlue transition flex flex-col justify-between space-y-3">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full text-white bg-montanoBlue">
+                                    Example ${ex.id} • ${ex.category}
+                                </span>
+                                <button onclick="speakText('${escapeQuotes(ex.scenario)}')" title="Listen to example" class="text-montanoBlue hover:text-sky-800 p-1.5 rounded-lg bg-sky-50">
+                                    <i class="fa-solid fa-volume-high text-sm"></i>
+                                </button>
+                            </div>
+                            <h5 class="font-bold text-gray-800 text-sm mb-1">${ex.title}</h5>
+                            <p class="text-xs text-gray-600 bg-gray-50 p-2.5 rounded-lg border border-gray-100 mb-2 italic">
+                                "${ex.scenario}"
+                            </p>
+                        </div>
+                        <div class="text-xs text-gray-700 bg-blue-50/60 p-2.5 rounded-lg border-l-2 border-montanoBlue">
+                            <strong>Analysis:</strong> ${ex.explanation}
+                        </div>
+                    </div>
+                `;
+
+                if (ex.level === 1) basicGrid.innerHTML += cardHtml;
+                else if (ex.level === 2) interGrid.innerHTML += cardHtml;
+                else if (ex.level === 3) advGrid.innerHTML += cardHtml;
+            });
+        }
+
+        function escapeQuotes(str) {
+            return str.replace(/'/g, "\\'").replace(/"/g, '\\"');
+        }
+
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // Stop current speech
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.95;
+                window.speechSynthesis.speak(utterance);
+                showToast("Playing Text-to-Speech audio...");
+            } else {
+                showToast("TTS not supported in this browser environment.", "error");
+            }
+        }
+
+        /* --------------------------------------------------
+           TAB 3: SPEECH SIMULATOR & RECOGNITION & DASHBOARD
+        -------------------------------------------------- */
+        const simPromptsList = [
+            "Explain to a peer the core difference between Temperament and Character using a concrete example.",
+            "Describe a situation where a person's Nature and Nurture work together to shape their personality.",
+            "Why is temporary mood considered a Non-Example of personality? Clarify with an instance.",
+            "How can a student develop strong Character despite having an anxious biological Temperament?"
+        ];
+        let currentPromptIdx = 0;
+
+        function newSimPrompt() {
+            currentPromptIdx = (currentPromptIdx + 1) % simPromptsList.length;
+            document.getElementById('simPrompt').innerText = `"${simPromptsList[currentPromptIdx]}"`;
+            showToast("New simulation prompt loaded");
+        }
+
+        let recognition = null;
+        let isRecording = false;
+
+        function initSpeechRecognition() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (SpeechRecognition) {
+                recognition = new SpeechRecognition();
+                recognition.continuous = false;
+                recognition.lang = 'en-US';
+                recognition.interimResults = false;
+
+                recognition.onstart = function() {
+                    isRecording = true;
+                    document.getElementById('recordingBadge').classList.remove('hidden');
+                    document.getElementById('micBtnText').innerText = "Listening... Click to Stop";
+                    document.getElementById('micBtn').classList.replace('bg-rose-600', 'bg-amber-600');
+                };
+
+                recognition.onresult = function(event) {
+                    const transcript = event.results[0][0].transcript;
+                    document.getElementById('speechTransmittedText').value = transcript;
+                    showToast("Speech captured successfully!");
+                };
+
+                recognition.onerror = function(event) {
+                    showToast("Speech recognition error: " + event.error, "error");
+                    stopRecordingState();
+                };
+
+                recognition.onend = function() {
+                    stopRecordingState();
+                };
+            } else {
+                console.warn("Speech Recognition API not supported in this browser.");
+            }
+        }
+
+        function toggleSpeechRecognition() {
+            if (!recognition) {
+                initSpeechRecognition();
+            }
+
+            if (!recognition) {
+                showToast("Speech recognition is not supported by your browser. Please type your response.", "error");
+                return;
+            }
+
+            if (isRecording) {
+                recognition.stop();
+                stopRecordingState();
+            } else {
+                try {
+                    recognition.start();
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+        }
+
+        function stopRecordingState() {
+            isRecording = false;
+            document.getElementById('recordingBadge').classList.add('hidden');
+            document.getElementById('micBtnText').innerText = "Start Speaking";
+            document.getElementById('micBtn').classList.replace('bg-amber-600', 'bg-rose-600');
+        }
+
+        function evaluateSpeechInput() {
+            const text = document.getElementById('speechTransmittedText').value.trim();
+            if (!text) {
+                showToast("Please provide a spoken or typed response before evaluating.", "error");
+                return;
+            }
+
+            // Keyword analysis
+            const targetKeywords = ["temperament", "character", "personality", "nature", "nurture", "genetics", "moral", "biology", "environment", "example", "stable"];
+            const lowerText = text.toLowerCase();
+            const detected = targetKeywords.filter(kw => lowerText.includes(kw));
+
+            // Calculate scores based on length, complexity, and keyword density
+            const wordCount = text.split(/\s+/).length;
+            const pronunciationScore = Math.min(100, Math.max(65, Math.floor(75 + Math.random() * 20)));
+            const accuracyScore = Math.min(100, Math.floor((detected.length / 4) * 50 + (wordCount > 15 ? 40 : 20)));
+            const etiquetteScore = Math.min(100, Math.floor(70 + (lowerText.includes("because") || lowerText.includes("for example") || lowerText.includes("therefore") ? 25 : 10)));
+
+            // Update Bars
+            document.getElementById('scorePronunciationText').innerText = `${pronunciationScore}%`;
+            document.getElementById('barPronunciation').style.width = `${pronunciationScore}%`;
+
+            document.getElementById('scoreAccuracyText').innerText = `${accuracyScore}%`;
+            document.getElementById('barAccuracy').style.width = `${accuracyScore}%`;
+
+            document.getElementById('scoreEtiquetteText').innerText = `${etiquetteScore}%`;
+            document.getElementById('barEtiquette').style.width = `${etiquetteScore}%`;
+
+            // Display detected keywords
+            const badgeContainer = document.getElementById('keywordBadgeContainer');
+            if (detected.length > 0) {
+                badgeContainer.innerHTML = detected.map(kw => 
+                    `<span class="bg-montanoBlue/10 text-montanoBlue font-bold text-xs px-2.5 py-1 rounded-full border border-montanoBlue/30"><i class="fa-solid fa-check mr-1"></i>${kw}</span>`
+                ).join('');
+            } else {
+                badgeContainer.innerHTML = `<span class="text-xs text-rose-500 font-semibold">No specific psychological key terms detected. Try adding words like 'Temperament', 'Character', or 'Nature'.</span>`;
+            }
+
+            // AI Feedback generation
+            let feedback = "";
+            let aiSpeak = "";
+
+            if (accuracyScore >= 75) {
+                feedback = `Excellent analysis! You effectively incorporated key concepts like ${detected.join(', ')}. Your response demonstrates clear B2-C1 ESL academic fluency.`;
+                aiSpeak = "Great job! Your explanation is accurate and clearly distinguishes key psychological terms.";
+            } else {
+                feedback = "Good effort! To improve your accuracy score, explicitly define how biological Temperament differs from learned Character or environment.";
+                aiSpeak = "Nice try! Consider including specific examples of temperament versus character to strengthen your response.";
+            }
+
+            document.getElementById('aiPedagogicalFeedback').innerText = feedback;
+            document.getElementById('aiResponseText').innerText = `"${aiSpeak}"`;
+            
+            // Speak response
+            speakText(aiSpeak);
+        }
+
+        function speakAIResponse() {
+            const responseText = document.getElementById('aiResponseText').innerText;
+            speakText(responseText);
+        }
+
+        /* --------------------------------------------------
+           TAB 4: REFLECTION SAVING
+        -------------------------------------------------- */
+        function saveReflections() {
+            const r1 = document.getElementById('refl1').value.trim();
+            const r2 = document.getElementById('refl2').value.trim();
+            const r3 = document.getElementById('refl3').value.trim();
+
+            if (!r1 && !r2 && !r3) {
+                showToast("Please write at least one reflection before saving.", "error");
+                return;
+            }
+
+            showToast("Critical Reflections successfully saved to local portfolio!");
+        }
+
+        /* --------------------------------------------------
+           TAB 5: FORMATIVE EVALUATION RENDERING
+        -------------------------------------------------- */
+        function renderFormativeEvaluation() {
+            const container1 = document.getElementById('evalLevel1Container');
+            const container2 = document.getElementById('evalLevel2Container');
+            const container3 = document.getElementById('evalLevel3Container');
+
+            evaluationExercisesData.forEach(item => {
+                const itemHtml = `
+                    <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm space-y-3">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                            <span class="font-bold text-gray-800 text-sm">
+                                <span class="text-montanoBlue font-extrabold mr-1">Problem ${item.id}.</span> ${item.question}
+                            </span>
+                            <button onclick="toggleSolution(${item.id})" id="solBtn-${item.id}" 
+                                class="text-xs font-bold bg-gray-100 hover:bg-montanoBlue hover:text-white text-gray-700 px-3 py-1.5 rounded-lg transition border border-gray-300 flex items-center gap-1.5 whitespace-nowrap">
+                                <i class="fa-solid fa-eye"></i> <span>Show Solution</span>
+                            </button>
+                        </div>
+                        <div id="solBox-${item.id}" class="hidden bg-emerald-50/70 border-l-4 border-emerald-500 p-3 rounded-r-lg text-xs text-gray-800 space-y-1">
+                            <span class="font-bold text-emerald-800 flex items-center gap-1">
+                                <i class="fa-solid fa-square-check"></i> Step-by-Step Solution & Pedagogical Explanation:
+                            </span>
+                            <p class="text-gray-700">${item.solution}</p>
+                        </div>
+                    </div>
+                `;
+
+                if (item.level === 1) container1.innerHTML += itemHtml;
+                else if (item.level === 2) container2.innerHTML += itemHtml;
+                else if (item.level === 3) container3.innerHTML += itemHtml;
+            });
+        }
+
+        function toggleSolution(id) {
+            const box = document.getElementById(`solBox-${id}`);
+            const btn = document.getElementById(`solBtn-${id}`);
+            const isHidden = box.classList.contains('hidden');
+
+            if (isHidden) {
+                box.classList.remove('hidden');
+                btn.innerHTML = `<i class="fa-solid fa-eye-slash"></i> <span>Hide Solution</span>`;
+                btn.classList.replace('bg-gray-100', 'bg-montanoBlue');
+                btn.classList.add('text-white');
+            } else {
+                box.classList.add('hidden');
+                btn.innerHTML = `<i class="fa-solid fa-eye"></i> <span>Show Solution</span>`;
+                btn.classList.replace('bg-montanoBlue', 'bg-gray-100');
+                btn.classList.remove('text-white');
+            }
+        }
+
+        /* --------------------------------------------------
+           UTILITIES: TOAST NOTIFICATIONS
+        -------------------------------------------------- */
+        function showToast(msg, type = "success") {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            const toastIcon = document.getElementById('toastIcon');
+
+            toastMsg.innerText = msg;
+            if (type === "error") {
+                toastIcon.className = "fa-solid fa-triangle-exclamation text-rose-400";
+            } else {
+                toastIcon.className = "fa-solid fa-circle-check text-emerald-400";
+            }
+
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        /* --------------------------------------------------
+           INITIALIZATION ON WINDOW LOAD
+        -------------------------------------------------- */
+        window.onload = function() {
+            renderSolvedExamples();
+            renderFormativeEvaluation();
+            initSpeechRecognition();
+        };
+    </script>
+</body>
+</html>
